@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reconocimiento Facial - Personas Desaparecidas</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        img { max-width: 600px; margin-top: 10px; }
+        .alerta { color: red; font-weight: bold; }
+        .ok { color: green; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Buscador Facial de Personas Desaparecidas</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="imagen" required>
+        <button type="submit">Subir y Analizar</button>
+    </form>
+
+    {% if resultados %}
+        <h2>🧠 Resultados:</h2>
+        <ul>
+            {% for r in resultados %}
+                <li class="{{ 'alerta' if 'ALERTA' in r.mensaje else 'ok' }}">{{ r.mensaje }}</li>
+            {% endfor %}
+        </ul>
+        <img src="{{ imagen }}">
+    {% endif %}
+</body>
+</html>
