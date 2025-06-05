@@ -1,13 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Detector de Personas Desaparecidas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Policial de Análisis de Personas Desaparecidas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Subir Imagen para Análisis</h1>
-    <form action="{{ url_for('procesar') }}" method="post" enctype="multipart/form-data">
-        <input type="file" name="imagen" required>
-        <button type="submit">Analizar Imagen</button>
-    </form>
+    <div class="container">
+        <div class="header">
+            <div class="badge">
+                🚔 SISTEMA POLICIAL
+            </div>
+            <h1>Análisis de Personas Desaparecidas</h1>
+            <p>Sistema de Reconocimiento Facial para Fuerzas del Orden</p>
+            <div class="classification-badge">⚠️ ACCESO RESTRINGIDO - PERSONAL AUTORIZADO</div>
+        </div>
+
+        <div class="upload-section">
+            <form action="{{ url_for('procesar') }}" method="post" enctype="multipart/form-data" id="uploadForm">
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <input type="file" name="imagen" id="fileInput" class="file-input" accept="image/*" required onchange="handleFileSelect(event)">
+                    <div class="upload-icon">🔍</div>
+                    <div class="upload-text">Cargar Imagen de Evidencia</div>
+                    <div class="upload-subtext">JPG, PNG, WEBP • Máximo 10MB • Alta resolución recomendada</div>
+                </div>
+                
+                <div class="security-notice">
+                    🔒 <strong>Protocolo de Seguridad:</strong> Todas las imágenes son procesadas en servidores seguros y eliminadas automáticamente después del análisis conforme a las políticas de privacidad institucionales.
+                </div>
+                
+                <div class="file-info" id="fileInfo">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                        <span style="font-size: 1.5rem;">📄</span>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1f2937; margin-bottom: 4px;" id="fileName"></div>
+                            <div style="font-size: 0.9rem; color: #6b7280;" id="fileSize"></div>
+                        </div>
+                        <div style="background: #d1fae5; color: #065f46; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">
+                            ✓ VÁLIDO
+                        </div>
+                    </div>
+                    
+                    <div class="case-info">
+                        <div class="case-field">
+                            <label>Caso No.</label>
+                            <span id="caseNumber">-</span>
+                        </div>
+                        <div class="case-field">
+                            <label>Fecha/Hora</label>
+                            <span id="timestamp">-</span>
+                        </div>
+                        <div class="case-field">
+                            <label>Oficial</label>
+                            <span>Sistema Automático</span>
+                        </div>
+                        <div class="case-field">
+                            <label>Prioridad</label>
+                            <span style="color: #dc2626;">ALTA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="analyze-btn" id="analyzeBtn" disabled>
+                    🔍 Iniciar busqueda 
+                </button>
+            </form>
+        </div>
+
+        <div class="footer">
+            <div class="department">Departamento de Investigación Criminal</div>
+            <p>Sistema integrado con Base de Datos Nacional de Personas Desaparecidas</p>
+            <p style="margin-top: 8px;">
+                <a href="#">Manual de Procedimientos</a> • 
+                <a href="#">Protocolos de Seguridad</a> • 
+                <a href="#">Soporte Técnico 24/7</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
