@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detector de Personas Desaparecidas</title>
+</head>
+<body>
+    <h1>Subir Imagen para Análisis</h1>
+    <form action="{{ url_for('procesar') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="imagen" required>
+        <button type="submit">Analizar Imagen</button>
+    </form>
+</body>
+</html>
