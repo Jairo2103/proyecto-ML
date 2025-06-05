@@ -40,13 +40,28 @@ def analizar_imagen(nombre_imagen):
             nombre = nombres[index]
             encontrados.append(nombre)
             cv2.rectangle(imagen_cv, (left, top), (right, bottom), (0, 0, 255), 2)
-            etiqueta = f"Desaparecido: {nombre}"
-            (w, h), _ = cv2.getTextSize(etiqueta, cv2.FONT_HERSHEY_SIMPLEX, 0.6, 1)
+            
+            # Modificación para mostrar el texto en dos líneas
+            etiqueta1 = "Desaparecido"
+            etiqueta2 = nombre
+            
+            # Obtener dimensiones para ambas etiquetas
+            (w1, h1), _ = cv2.getTextSize(etiqueta1, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 1)
+            (w2, h2), _ = cv2.getTextSize(etiqueta2, cv2.FONT_HERSHEY_SIMPLEX, 0.9, 1)
+            
+            # Usar el ancho más grande para el rectángulo de fondo
+            w = max(w1, w2)
+            
+            # Crear el fondo semi-transparente
             overlay = imagen_cv.copy()
-            cv2.rectangle(overlay, (left, bottom), (left + w + 12, bottom + 25), (0, 0, 255), -1)
+            cv2.rectangle(overlay, (left, bottom), (left + w + 12, bottom + 45), (0, 0, 255), -1)
             cv2.addWeighted(overlay, 0.5, imagen_cv, 0.5, 0, imagen_cv)
-            cv2.putText(imagen_cv, etiqueta, (left + 6, bottom + 18), 
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 1)
+            
+            # Agregar ambas líneas de texto
+            cv2.putText(imagen_cv, etiqueta1, (left + 6, bottom + 18), 
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 255, 255), 1)
+            cv2.putText(imagen_cv, etiqueta2, (left + 6, bottom + 38), 
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 255, 255), 1)
         else:
             cv2.rectangle(imagen_cv, (left, top), (right, bottom), (0, 255, 0), 2)
 
