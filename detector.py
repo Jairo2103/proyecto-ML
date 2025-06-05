@@ -33,7 +33,7 @@ def analizar_imagen(nombre_imagen):
     encontrados = []
 
     for (top, right, bottom, left), encoding in zip(face_locations, encodings_encontrados):
-        resultados = face_recognition.compare_faces(rostros_desaparecidos, encoding)
+        resultados = face_recognition.compare_faces(rostros_desaparecidos, encoding, tolerance=0.5)
         
         if True in resultados:
             index = resultados.index(True)
