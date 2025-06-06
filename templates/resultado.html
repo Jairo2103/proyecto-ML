@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultado del Análisis - Sistema Policial</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -18,80 +20,79 @@
 
         <div class="results-main">
             {% if alertas %}
-                <div class="alert-section alert-danger">
-                    <div class="alert-header">
-                        <span class="alert-icon">🚨</span>
-                        <div class="alert-title">
-                            <h2>¡ALERTA CRÍTICA!</h2>
-                            <p>Personas desaparecidas detectadas en la imagen</p>
-                        </div>
+            <div class="alert-section alert-danger">
+                <div class="alert-header">
+                    <span class="alert-icon">🚨</span>
+                    <div class="alert-title">
+                        <h2>¡ALERTA CRÍTICA!</h2>
+                        <p>Personas desaparecidas detectadas en la imagen</p>
                     </div>
-                    
-                    <div class="alert-content">
-                        <div class="status-indicator status-critical">
-                            ⚠️ COINCIDENCIA CONFIRMADA - ACCIÓN INMEDIATA REQUERIDA
-                        </div>
-                        
-                        <div class="persons-detected">
-                            <h3>Personas identificadas:</h3>
-                            <ul class="persons-list">
-                                {% for persona in alertas %}
-                                    <li class="person-item">
-                                        <span class="person-icon">👤</span>
-                                        <span class="person-name">{{ persona }}</span>
-                                        <span class="person-status">CONFIRMADO</span>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                </div>
 
-                        <div class="action-required">
-                            <h4>🔔 Protocolo de Acción:</h4>
-                            <ol>
-                                <li>Notificar inmediatamente al supervisor de turno</li>
-                                <li>Activar protocolo de búsqueda y rescate</li>
-                                <li>Coordinar con unidades de campo más cercanas</li>
-                                <li>Documentar ubicación y circunstancias del hallazgo</li>
-                            </ol>
-                        </div>
+                <div class="alert-content">
+                    <div class="status-indicator status-critical">
+                        ⚠️ COINCIDENCIA CONFIRMADA - ACCIÓN INMEDIATA REQUERIDA
+                    </div>
+
+                    <div class="persons-detected">
+                        <h3>Personas identificadas:</h3>
+                        <ul class="persons-list">
+                            {% for persona in alertas %}
+                            <li class="person-item">
+                                <span class="person-icon">👤</span>
+                                <span class="person-name">{{ persona }}</span>
+                                <span class="person-status">CONFIRMADO</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="action-required">
+                        <h4>🔔 Protocolo de Acción:</h4>
+                        <ol>
+                            <li>Notificar inmediatamente al supervisor de turno</li>
+                            <li>Activar protocolo de búsqueda y rescate</li>
+                            <li>Coordinar con unidades de campo más cercanas</li>
+                            <li>Documentar ubicación y circunstancias del hallazgo</li>
+                        </ol>
                     </div>
                 </div>
+            </div>
             {% else %}
-                <div class="alert-section alert-success">
-                    <div class="alert-header">
-                        <span class="alert-icon">✅</span>
-                        <div class="alert-title">
-                            <h2>Análisis Completado</h2>
-                            <p>No se detectaron coincidencias con personas desaparecidas</p>
-                        </div>
-                    </div>
-                    
-                    <div class="alert-content">
-                        <div class="status-indicator status-clear">
-                            ✓ SIN COINCIDENCIAS - Base de datos consultada exitosamente
-                        </div>
-                        
-                        <div class="analysis-details">
-                            <h4>📊 Detalles del Análisis:</h4>
-                            <ul>
-                                <li><strong>Rostros detectados:</strong> Procesados correctamente</li>
-                                <li><strong>Base de datos consultada:</strong> 847,392 registros</li>
-                                <li><strong>Nivel de confianza:</strong> 98.7%</li>
-                                <li><strong>Estado:</strong> Análisis completado sin alertas</li>
-                            </ul>
-                        </div>
+            <div class="alert-section alert-success">
+                <div class="alert-header">
+                    <span class="alert-icon">✅</span>
+                    <div class="alert-title">
+                        <h2>Análisis Completado</h2>
+                        <p>No se detectaron coincidencias con personas desaparecidas</p>
                     </div>
                 </div>
+
+                <div class="alert-content">
+                    <div class="status-indicator status-clear">
+                        ✓ SIN COINCIDENCIAS - Base de datos consultada exitosamente
+                    </div>
+
+                    <div class="analysis-details">
+                        <h4>📊 Detalles del Análisis:</h4>
+                        <ul>
+                            <li><strong>Rostros detectados:</strong> Procesados correctamente</li>
+                            <li><strong>Base de datos consultada:</strong> 847,392 registros</li>
+                            <li><strong>Nivel de confianza:</strong> 98.7%</li>
+                            <li><strong>Estado:</strong> Análisis completado sin alertas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             {% endif %}
 
             <div class="image-section">
                 <h3>📷 Imagen Analizada</h3>
                 <div class="image-container">
-                    <img src="{{ url_for('static', filename='resultados/' + imagen_resultado) }}" 
-                         alt="Resultado del análisis" 
-                         class="result-image">
+                    <img src="{{ url_for('static', filename='resultados/' + imagen_resultado) }}"
+                        alt="Resultado del análisis" class="result-image">
                 </div>
-                
+
                 <div class="image-info">
                     <div class="image-details">
                         <span><strong>Archivo:</strong> {{ imagen_resultado }}</span>
@@ -106,7 +107,7 @@
             <a href="/" class="btn-back">
                 ⬅️ Realizar Nuevo Análisis
             </a>
-            
+
             <button class="btn-report" onclick="window.print()">
                 📄 Generar Reporte
             </button>
@@ -116,15 +117,15 @@
             <div class="department">Departamento de Investigación Criminal</div>
             <p>Reporte generado automáticamente por el Sistema de Reconocimiento Facial</p>
             <p style="margin-top: 8px;">
-                <a href="#">Manual de Procedimientos</a> • 
-                <a href="#">Protocolos de Seguridad</a> • 
+                <a href="#">Manual de Procedimientos</a> •
+                <a href="#">Protocolos de Seguridad</a> •
                 <a href="#">Soporte Técnico 24/7</a>
             </p>
         </div>
     </div>
 
     <script>
-        // Mostrar fecha y hora actual
+        
         document.getElementById('currentTime').textContent = new Date().toLocaleString('es-ES', {
             year: 'numeric',
             month: '2-digit',
@@ -135,4 +136,5 @@
         });
     </script>
 </body>
+
 </html>

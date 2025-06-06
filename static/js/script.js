@@ -1,4 +1,4 @@
-// Funciones para generar información del caso
+
 function generateCaseNumber() {
     const now = new Date();
     const year = now.getFullYear();
@@ -20,7 +20,7 @@ function formatTimestamp() {
     });
 }
 
-// Manejar selección de archivo
+
 function handleFileSelect(event) {
     const file = event.target.files[0];
     const fileInfo = document.getElementById('fileInfo');
@@ -31,7 +31,7 @@ function handleFileSelect(event) {
     const analyzeBtn = document.getElementById('analyzeBtn');
 
     if (file) {
-        // Validar tipo de archivo
+        
         const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
         if (!validTypes.includes(file.type)) {
             alert('⚠️ Tipo de archivo no válido. Solo se permiten: JPG, PNG, WEBP');
@@ -39,21 +39,21 @@ function handleFileSelect(event) {
             return;
         }
 
-        // Validar tamaño (10MB máximo)
-        const maxSize = 10 * 1024 * 1024; // 10MB en bytes
+        
+        const maxSize = 10 * 1024 * 1024; 
         if (file.size > maxSize) {
             alert('⚠️ El archivo es demasiado grande. Tamaño máximo: 10MB');
             event.target.value = '';
             return;
         }
 
-        // Mostrar información del archivo
+        
         fileName.textContent = file.name;
         fileSize.textContent = `${(file.size / 1024 / 1024).toFixed(2)} MB • ${file.type}`;
         caseNumber.textContent = generateCaseNumber();
         timestamp.textContent = formatTimestamp();
         
-        // Mostrar sección de información y habilitar botón
+        
         fileInfo.classList.add('show');
         analyzeBtn.disabled = false;
         
@@ -61,7 +61,7 @@ function handleFileSelect(event) {
     }
 }
 
-// Efectos de drag & drop
+
 function initializeDragAndDrop() {
     const uploadArea = document.querySelector('.upload-area');
     
@@ -88,7 +88,7 @@ function initializeDragAndDrop() {
         const files = dt.files;
 
         if (files.length > 0) {
-            // Simular un evento de selección de archivo
+            
             const event = {
                 target: {
                     files: files
